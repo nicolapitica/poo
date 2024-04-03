@@ -14,7 +14,6 @@ private:
     std::vector<std::string> expirate;
     int stoc;
     int nrFarmacisti;
-    
     double pret_total(double pret,int cantitate) const;
     
 
@@ -22,6 +21,7 @@ public:
     Farmacie();
     ~Farmacie();
 
+    friend std::istream& citirefarmacist(std::istream& is,Farmacie farmacie);
     void adaugaFarmacist(const char* numeFarmacist);
     void adaugaMedicament(const char* nume, double pret, int cantitate, const char* data_exp);
     void vindeMedicament(Medicament& medicament, int cantitate);

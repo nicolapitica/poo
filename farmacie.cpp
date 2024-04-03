@@ -4,7 +4,7 @@
 #include <iostream>
 #include <cstring>
 
-Farmacie::Farmacie() : inventar(NULL), farmacisti(NULL), stoc(0), nrFarmacisti(0),expirate(NULL) {}
+Farmacie::Farmacie() : inventar(), farmacisti(), stoc(0), nrFarmacisti(0),expirate() {}
 
 Farmacie::~Farmacie() 
 {
@@ -52,26 +52,15 @@ void Farmacie::adaugaFarmacist(const char* numeFarmacist)
     nrFarmacisti++;
     Farmacist* aux = new Farmacist(numeFarmacist);
     farmacisti.push_back(*aux);
-    // if (farmacisti == NULL) 
-    // {
-    //     farmacisti = aux;
-    // } 
-    // else 
-    // {
-    //     std::vector<Farmacist> auxFarmacisti;
-    //     for (int i = 0; i < nrFarmacisti - 1; ++i)
-    //         auxFarmacisti[i] = farmacisti[i];        
-    //     auxFarmacisti[nrFarmacisti - 1] = *aux;
-    //     delete[]this-> farmacisti;
-    //     farmacisti(auxFarmacisti);
-    // }
-    // delete aux;
-    /*
-    nrFarmacisti++;
-    farmacisti[nrFarmacisti] = new Farmacist(numeFarmacist);
-    */
 }
-
+std::istream& citirefarmacist(std::istream& is,Farmacie& farmacie)
+{
+    std::string numeFarmacist;
+    std::cout << "Farmacist nou: ";
+    getline(is, numeFarmacist);
+    farmacie.adaugaFarmacist(numeFarmacist.c_str());
+    return is;
+}
 void Farmacie::adaugaMedicament(const char* nume, double pret, int cantitate, const char* data_exp) 
 {
     int ok=0;
@@ -85,12 +74,6 @@ void Farmacie::adaugaMedicament(const char* nume, double pret, int cantitate, co
     }
     if(ok==0)
     {
-        // Medicament* auxInventar = new Medicament[stoc + 1]; 
-        // for (int i = 0; i < stoc; ++i) 
-        //     auxInventar[i] = inventar[i];
-        // auxInventar[stoc++] = Medicament(nume, pret, cantitate, data_exp);
-        // delete[]this-> inventar;
-        // inventar = auxInventar;
         Medicament deadaugat = Medicament(nume, pret, cantitate, data_exp);
         inventar.push_back(deadaugat);
     }
@@ -130,13 +113,11 @@ void Farmacie::afisare_farmacisti()
     }    
 }
 
-std::ostream& operator<<(std::ostream& os, Farmacie &f1){
+std::ostream& operator<<(std::ostream& os, Farmacie &f1)
+{
     os << "Lista farmacisti: " << std::endl;
     f1.afisare_farmacisti();
     os << "Lista inventar: " << std::endl;
     f1.afisare_inventar();
-}
-
-int main(){
-    return 0;
+    return os;
 }

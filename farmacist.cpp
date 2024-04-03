@@ -24,7 +24,3 @@ std::ostream& operator<<(std::ostream& os, Farmacist farm1)
     os << "Nume farmacist: " << farm1.numeFarmacist << '\n';
     return os;
 }
-
-int main(){
-    return 0;
-}
