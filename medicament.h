@@ -1,27 +1,30 @@
-#ifndef medicament_H
-#define medicament_H
+#ifndef MEDICAMENT_H
+#define MEDICAMENT_H
 
 #include <iostream>
-#include <cstring>
+#include <string>
 
 class Medicament 
 {
 private:
-    char* nume;
+    std::string nume;
     double pret;
     int cantitate;
-    char* data_exp;
+    std::string data_exp;
 
 
 public:
-    Medicament(const char* nume, double pret, int cantitate, const char* data_exp);
-    ~Medicament();
-    char* get_nume() const;
+    //Constructorul
+    Medicament(const std::string nume, double pret, int cantitate, const std::string data_exp);
+    //Getteri 
+    const std::string& get_nume() const;
     int get_cantitate() const;
-    void set_cantitate(int cantitate_noua);
-    char* get_data_exp() const;
     double get_pret() const;
-    friend std::ostream& operator<<(std::ostream& os, Medicament m1);
+    const std::string& get_data_exp() const;
+    //Setteri
+    void set_cantitate(int cantitate_noua);
+    //Functie friend pentru afisare
+    friend std::ostream& operator<<(std::ostream& os, const Medicament& m1);
 };
 
 #endif

@@ -1,25 +1,16 @@
-#include "Farmacist.h"
-#include "Medicament.h"
+#include "farmacist.h"
 #include <iostream>
-#include <cstring>
+#include <string>
 
-Farmacist::Farmacist(const char* numeFarmacist) 
-{
-    this->numeFarmacist = new char[strlen(numeFarmacist) + 1];
-    strcpy(this->numeFarmacist, numeFarmacist);
-}
-
-Farmacist::~Farmacist() 
-{
-    delete[]this->numeFarmacist;
-}
-
-const char* Farmacist::get_numeFarmacist() const 
+//Implementarea constructorului
+Farmacist::Farmacist(const std::string numeFarmacist): numeFarmacist(numeFarmacist) {}
+//Implementarea getter-ului
+const std::string Farmacist::get_numeFarmacist() const 
 {
     return this->numeFarmacist;
 }
-
-std::ostream& operator<<(std::ostream& os, Farmacist farm1)
+//Implementarea functiei pentru afisare
+std::ostream& operator<<(std::ostream& os, const Farmacist& farm1)
 {
     os << "Nume farmacist: " << farm1.numeFarmacist << '\n';
     return os;
