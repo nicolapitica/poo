@@ -1,35 +1,39 @@
-#ifndef farmacie_H
-#define farmacie_H
+#ifndef FARMACIE_H
+#define FARMACIE_H
 #include <iostream>
 #include <string>
 #include <vector>
-class Medicament;
-class Farmacist;
+
+
+#include "farmacist.h"
+#include "medicament.h"
 
 class Farmacie 
 {
 private:
     std::vector<Medicament> inventar;
     std::vector<Farmacist> farmacisti;
-    std::vector<std::string> expirate;
     int stoc;
     int nrFarmacisti;
+    //Metode private
     double pret_total(double pret,int cantitate) const;
-    
-
-public:
-    Farmacie();
-    ~Farmacie();
-
-    friend std::istream& citirefarmacist(std::istream& is,Farmacie farmacie);
     void adaugaFarmacist(const char* numeFarmacist);
     void adaugaMedicament(const char* nume, double pret, int cantitate, const char* data_exp);
-    void vindeMedicament(Medicament& medicament, int cantitate);
-    void afisare_inventar();
-    void afisare_farmacisti(); 
-    void retragere_casare_expirate();
-    
-    friend std::ostream& operator<<(std::ostream& os, const Farmacie f1);
+    void vindeMedicament(const char* nume, int cantitate);
+    void afisare_inventar() const;
+    void afisare_farmacisti() const;
+
+public:
+    //Constructor
+    Farmacie();
+    //Functiile pentru citire
+     std::istream& citirefarmacist(std::istream& is, Farmacie& farmacie);
+     std::istream& citiremedicament(std::istream& is, Farmacie& farmacie);
+     std::istream& citirevanzare(std::istream& is, Farmacie& farmacie);
+    //Alte metode proprii
+    void retragere_casare_expirate(); 
+    //Functiei pentru afisare
+    friend std::ostream& operator<<(std::ostream& os, const Farmacie& f1);
 };
 
 #endif
